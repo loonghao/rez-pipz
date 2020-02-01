@@ -687,7 +687,15 @@ def call(command, **kwargs):
 
 
 def _rez_name(pip_name):
-    return pip_name.replace("-", "_")
+    """Uniform rez package name.
+
+    Qt.py --> qt_py
+    FlaskRESTFul --> flask_restful
+    PyYAML --> pyyaml
+
+    """
+    # https://regex101.com/r/4mIPrk/1
+    return re.sub(r"[\.-]", "_", pip_name).lower()
 
 
 def _pip_to_rez_requirements(distribution):
